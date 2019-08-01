@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Bonotel Resgression Suite" parallel="classes" thread-count="66"  verbose="2" >
+  <test thread-count="66" name="Test hotel XML In bonotel">
+   	 <parameter name="TestUrl" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetAvailability.do"/>
+	 <parameter name="TestUrlRes" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetReservation.do"/>
+	 <parameter name="TestUrlCnx" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetCancellation.do"/>
+     <parameter name="TestUrlMod" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetModifyReservation.do"/>
+     <parameter name="TestUrlLook" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/LookupReservation.do"/>
+    <classes>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID01_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID02_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID03_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID04_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID05_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID06_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID07_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID08_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID09_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID10_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID11_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID12_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID13_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID14_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID15_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID16_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID17_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID18_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID19_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID20_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID21_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID22_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID23_TEST"/>
+ 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID24_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID25_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID26_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID27_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID28_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID29_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID30_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID31_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID32_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID33_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID34_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID35_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID36_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID37_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID38_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID39_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID40_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID41_TEST"/>
+    	 <class name="com.rezgateway.automation.tourmapper.AV_SC_ID42_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID43_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID44_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID45_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID46_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID47_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID48_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID49_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID50_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID51_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID52_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID53_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID54_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID55_TEST"/>
+    	 <class name="com.rezgateway.automation.tourmapper.AV_SC_ID56_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID57_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.CNX_SC_ID01_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.RES_SC_ID01_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.RES_SC_ID02_TEST"/> 
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID03_TEST"/>
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID04_TEST"/>
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID05_TEST"/>
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID06_TEST"/>
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID07_TEST"/>
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID08_TEST"/> 
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+<!--QA URL "http://192.168.1.83:8080/bonotelapps/bonotel/reservation/GetAvailability.do" -->
+<!--http://192.168.1.215:8080/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--S30 QA node-->
+<!--"http://104.239.174.152:8680/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--UAT Reservation nodes-->
+<!--"http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--UAT common node-->
+<!--"http://166.78.194.188:8580/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--app 1 live node 6-->
+<!--"http://bc4-app.secure-reservation.com:8580/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--BC_XML_APP1-->
+<!--"http://104.239.168.135:8280/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--test system -->
+
+
+<!-- <suite name="Bonotel Resgression Suite">
+  <test thread-count="5" name="Test">
+  <parameters>
+  	 <parameter name="TestUrlAvi" value="http://104.239.174.152:8580/bonotelapps/bonotel/reservation/GetAvailability.do"/>
+	 <parameter name="TestUrlRes" value="http://104.239.174.152:8680/bonotelapps/bonotel/reservation/GetReservation.do"	
+  </parameters>  
+    <classes>
+       <class name="com.rezgateway.automation.xmlout.hotel.BonoAvailabilityTest"/>
+       <class name="com.rezgateway.automation.xmlout.hotel.BonoReservationTest"/>
+    </classes>
+  </test> Test
+</suite> Suite -->
