@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Bonotel Resgression Suite" parallel="classes" thread-count="66"  verbose="2" >
-  <test thread-count="66" name="Test hotel XML In bonotel">
-   	 <parameter name="TestUrl" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetAvailability.do"/>
-	 <parameter name="TestUrlRes" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetReservation.do"/>
-	 <parameter name="TestUrlCnx" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetCancellation.do"/>
-     <parameter name="TestUrlMod" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetModifyReservation.do"/>
-     <parameter name="TestUrlLook" value="http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/LookupReservation.do"/>
+  <test thread-count="1" name="Test hotel XML In bonotel">
+   	 <parameter name="TestUrl" value="http://app1.xmlreservation.qa.use1.tourmappers.rezos.io:8080/apps/portal/reservation/GetAvailability.do"/>
+	 <parameter name="TestUrlRes" value="http://app1.xmlreservation.qa.use1.tourmappers.rezos.io:8080/apps/portal/reservation/GetReservation.do"/>
+	 <parameter name="TestUrlCnx" value="http://app1.xmlreservation.qa.use1.tourmappers.rezos.io:8080/apps/portal/reservation/GetCancellation.do"/>
+     <parameter name="TestUrlMod" value="http://app1.xmlreservation.qa.use1.tourmappers.rezos.io:8080/apps/portal/reservation/GetModifyReservation.do"/>
+     <parameter name="TestUrlLook" value="http://app1.xmlreservation.qa.use1.tourmappers.rezos.io:8080/apps/portal/reservation/LookupReservation.do"/>
     <classes>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID01_TEST"/>
-         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID02_TEST"/>
+         <!-->class name="com.rezgateway.automation.tourmapper.AV_SC_ID02_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID03_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID04_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID05_TEST"/>
@@ -73,7 +73,7 @@
    		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID05_TEST"/>
    		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID06_TEST"/>
    		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID07_TEST"/>
-   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID08_TEST"/> 
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID08_TEST"/--> 
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
@@ -81,7 +81,7 @@
 <!--QA URL "http://192.168.1.83:8080/bonotelapps/bonotel/reservation/GetAvailability.do" -->
 <!--http://192.168.1.215:8080/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--S30 QA node-->
 <!--"http://104.239.174.152:8680/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--UAT Reservation nodes-->
-<!--"http://uat-xml.bonotel.com/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--UAT common node-->
+<!--"http://app1.xmlreservation.qa.use1.tourmappers.rezos.io:8080/apps/portal/reservation/GetReservation.do" style="height:100%"--><!--UAT common node-->
 <!--"http://166.78.194.188:8580/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--app 1 live node 6-->
 <!--"http://bc4-app.secure-reservation.com:8580/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--BC_XML_APP1-->
 <!--"http://104.239.168.135:8280/bonotelapps/bonotel/reservation/GetReservation.do" style="height:100%"--><!--test system -->
