@@ -35,7 +35,7 @@ public class AV_SC_ID01_TEST extends ExtentTestNGReportBuilderExt{
 	@Parameters("TestUrl")
 	@Test(priority = 0)
 	public synchronized void availbilityTest(String TestUrl) throws Exception {
-    //test
+    
 		getAvailabilityData();
 		
 		String Scenario     = AviRequest.getScenarioID();
