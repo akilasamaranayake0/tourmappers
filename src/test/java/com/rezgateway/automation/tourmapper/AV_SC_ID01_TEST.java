@@ -57,7 +57,6 @@ public class AV_SC_ID01_TEST extends ExtentTestNGReportBuilderExt{
 
 			if (AvailabilityResponse.getHotelCount() > 0) {
 				result.setAttribute("Actual", "Results Available, Hotel Count :" + AvailabilityResponse.getHotelCount());
-				
 			} else {
 				result.setAttribute("Actual", "Results not available Error Code :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
 				Assert.fail("No Results Error Code :" + AvailabilityResponse.getErrorCode());
@@ -84,7 +83,7 @@ public class AV_SC_ID01_TEST extends ExtentTestNGReportBuilderExt{
 
 	}
 
-	@Test( dependsOnMethods = "availbilityTest")
+	@Test( enabled = false)
 	public synchronized void isAvailableShortDescription() {
 
 		ITestResult result = Reporter.getCurrentTestResult();
