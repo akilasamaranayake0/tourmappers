@@ -215,6 +215,14 @@ public class AV_SC_ID56_TEST extends ExtentTestNGReportBuilderExt{
 			Map<String, ArrayList<Room>> rooms = hotelInResponse.getRoomInfo();
 			ArrayList<String> flag = new ArrayList<String>();
 			for(Room r : rooms.entrySet().iterator().next().getValue() ){
+				
+				if(r.getRoomPolicy()==null)
+				{
+					result.setAttribute("Actual", " policy not found ");
+					flag.add("False");
+					Assert.fail("Cancellation policy not found ");
+				}
+				
 				for(BookingPolicy bockingPolicy : r.getRoomPolicy() ){
 		
 					if(("2019-02-17".equals(bockingPolicy.getPolicyFrom())&&("2021-02-17".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
@@ -222,8 +230,8 @@ public class AV_SC_ID56_TEST extends ExtentTestNGReportBuilderExt{
 					if("percentage".equals(bockingPolicy.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("10".equals(bockingPolicy.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));						
 					if(10==(bockingPolicy.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
-					if("$46.2".equals(bockingPolicy.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
-					if("$462.00".equals(bockingPolicy.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+					if("$92.4".equals(bockingPolicy.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+					if("$924.00".equals(bockingPolicy.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 				}
 			}
 			
