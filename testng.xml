@@ -8,19 +8,19 @@
      <parameter name="TestUrlMod" value="http://xml.stg.use1.tourmappers.rezos.io/apps/portal/reservation/GetModifyReservation.do"/>
      <parameter name="TestUrlLook" value="http://xml.stg.use1.tourmappers.rezos.io/apps/portal/reservation/LookupReservation.do"/>
     <classes>
-         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID01_TEST"/>
+       <!--  <class name="com.rezgateway.automation.tourmapper.AV_SC_ID01_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID02_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID03_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID04_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID05_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID06_TEST"/>
-<!--          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID07_TEST"/>
- -->         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID08_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID07_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID08_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID09_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID10_TEST"/>
-<!--         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID11_TEST"/>
- -->         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID12_TEST"/>
-        <!--  <class name="com.rezgateway.automation.tourmapper.AV_SC_ID13_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID11_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID12_TEST"/>
+         <class name="com.rezgateway.automation.tourmapper.AV_SC_ID13_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID14_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID15_TEST"/>
          <class name="com.rezgateway.automation.tourmapper.AV_SC_ID16_TEST"/>
@@ -46,13 +46,13 @@
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID36_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID37_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID38_TEST"/>
-	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID39_TEST"/>
+	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID39_TEST"/>  --> 
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID40_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID41_TEST"/>
     	 <class name="com.rezgateway.automation.tourmapper.AV_SC_ID42_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID43_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID44_TEST"/>
-	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID45_TEST"/>
+	    <!--   <class name="com.rezgateway.automation.tourmapper.AV_SC_ID45_TEST"/> -->
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID46_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID47_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID48_TEST"/>
@@ -65,7 +65,7 @@
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID55_TEST"/>
     	 <class name="com.rezgateway.automation.tourmapper.AV_SC_ID56_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.AV_SC_ID57_TEST"/>
-	     <class name="com.rezgateway.automation.tourmapper.CNX_SC_ID01_TEST"/>
+	<!--       <class name="com.rezgateway.automation.tourmapper.CNX_SC_ID01_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.RES_SC_ID01_TEST"/>
 	     <class name="com.rezgateway.automation.tourmapper.RES_SC_ID02_TEST"/> 
    		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID03_TEST"/>
@@ -73,7 +73,7 @@
    		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID05_TEST"/>
    		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID06_TEST"/>
    		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID07_TEST"/>
-   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID08_TEST"/   -->
+   		 <class name="com.rezgateway.automation.tourmapper.RES_SC_ID08_TEST"/> -->
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

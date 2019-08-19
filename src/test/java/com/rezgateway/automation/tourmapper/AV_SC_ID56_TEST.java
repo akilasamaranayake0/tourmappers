@@ -215,15 +215,23 @@ public class AV_SC_ID56_TEST extends ExtentTestNGReportBuilderExt{
 			Map<String, ArrayList<Room>> rooms = hotelInResponse.getRoomInfo();
 			ArrayList<String> flag = new ArrayList<String>();
 			for(Room r : rooms.entrySet().iterator().next().getValue() ){
+				
+				if(r.getRoomPolicy()==null)
+				{
+					result.setAttribute("Actual", " policy not found ");
+					flag.add("False");
+					Assert.fail("Cancellation policy not found ");
+				}
+				
 				for(BookingPolicy bockingPolicy : r.getRoomPolicy() ){
 		
-					if(("2018-02-28".equals(bockingPolicy.getPolicyFrom())&&("2018-12-31".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-17".equals(bockingPolicy.getPolicyFrom())&&("2021-02-17".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bockingPolicy.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("percentage".equals(bockingPolicy.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("10".equals(bockingPolicy.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));						
-					if(0==(bockingPolicy.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
-					if("$23.96".equals(bockingPolicy.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
-					if("$239.58".equals(bockingPolicy.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+					if(10==(bockingPolicy.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
+					if("$92.4".equals(bockingPolicy.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+					if("$924.00".equals(bockingPolicy.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 				}
 			}
 			
