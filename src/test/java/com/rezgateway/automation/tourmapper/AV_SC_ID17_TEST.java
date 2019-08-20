@@ -129,21 +129,24 @@ public class AV_SC_ID17_TEST extends ExtentTestNGReportBuilderExt{
 
 	}
 
-	@Test(dependsOnMethods = "availbilityTest")
-	public synchronized void testHotelCode() {
-
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Hotel Code ");
-		result.setAttribute("Expected", "Hotel Code should be  : " + AviRequest.getCode()[0]);
-
-		if (AvailabilityResponse.getHotelList().containsKey(AviRequest.getCode()[0])) {
-			result.setAttribute("Actual", AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-		} else {
-			result.setAttribute("Actual", "User entered Hotel Code is not in the Response : Actual Hotel Code is " + AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-			Assert.fail("User entered Hotel Code is not in the Response:");
-		}
-
-	}
+	/*
+	 * @Test( enabled = false) public synchronized void testHotelCode() {
+	 * 
+	 * ITestResult result = Reporter.getCurrentTestResult();
+	 * result.setAttribute("TestName", "Testing Hotel Code ");
+	 * result.setAttribute("Expected", "Hotel Code should be  : " +
+	 * AviRequest.getCode()[0]);
+	 * 
+	 * if (AvailabilityResponse.getHotelList().containsKey(AviRequest.getCode()[0]))
+	 * { result.setAttribute("Actual",
+	 * AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey()); }
+	 * else { result.setAttribute("Actual",
+	 * "User entered Hotel Code is not in the Response : Actual Hotel Code is " +
+	 * AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
+	 * Assert.fail("User entered Hotel Code is not in the Response:"); }
+	 * 
+	 * }
+	 */
 
 	@Test(dependsOnMethods = "availbilityTest")
 	public synchronized void testDayWiseRateAvailability() {
@@ -208,7 +211,7 @@ public class AV_SC_ID17_TEST extends ExtentTestNGReportBuilderExt{
 		}
 	}
 
-	@Test(dependsOnMethods = "availbilityTest")
+	@Test( enabled = false)
 	public synchronized void isHotelOnRequested(){
 
 		ITestResult result = Reporter.getCurrentTestResult();

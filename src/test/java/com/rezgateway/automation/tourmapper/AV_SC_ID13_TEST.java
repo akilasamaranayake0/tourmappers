@@ -130,7 +130,7 @@ public class AV_SC_ID13_TEST extends ExtentTestNGReportBuilderExt{
 
 	}
 
-	@Test(dependsOnMethods = "availbilityTest")
+	@Test( enabled = false)
 	public synchronized void testHotelCode() {
 
 		ITestResult result = Reporter.getCurrentTestResult();
@@ -210,7 +210,7 @@ public class AV_SC_ID13_TEST extends ExtentTestNGReportBuilderExt{
 	}
 	
 
-	@Test(dependsOnMethods = "testHotelCode")
+	@Test(dependsOnMethods = "availbilityTest")
 	public synchronized void isHotelOnRequested(){
 
 		ITestResult result = Reporter.getCurrentTestResult();
