@@ -213,7 +213,7 @@ public class AV_SC_ID15_TEST extends ExtentTestNGReportBuilderExt{
 		}
 	}
 	
-	@Test(dependsOnMethods = "availbilityTest")
+	@Test( enabled = false)
 	public synchronized void isHotelOnRequested(){
 
 		ITestResult result = Reporter.getCurrentTestResult();
