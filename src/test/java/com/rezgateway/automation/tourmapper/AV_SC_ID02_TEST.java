@@ -84,7 +84,7 @@ public class AV_SC_ID02_TEST extends ExtentTestNGReportBuilderExt{
 
 	}
 
-	@Test( enabled = false)
+	@Test( enabled = true)
 	public synchronized void isAvailableShortDescription() {
 
 		ITestResult result = Reporter.getCurrentTestResult();
@@ -211,7 +211,7 @@ public class AV_SC_ID02_TEST extends ExtentTestNGReportBuilderExt{
 		}
 	}
 	
-	@Test(dependsOnMethods = "testHotelCode")
+	@Test(dependsOnMethods = "availbilityTest")
 	public synchronized void isHotelOnRequested(){
 
 		ITestResult result = Reporter.getCurrentTestResult();
@@ -241,10 +241,7 @@ public class AV_SC_ID02_TEST extends ExtentTestNGReportBuilderExt{
 		}
 	}
 	
-	@Test(dependsOnMethods = "availbilityTest")
-	public synchronized void testHotelShortDescription() {
 
-	}
 
 	public AvailabilityRequest getAvailabilityData() throws Exception {
 

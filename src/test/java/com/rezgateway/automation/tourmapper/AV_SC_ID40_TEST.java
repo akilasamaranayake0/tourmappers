@@ -130,23 +130,28 @@ public class AV_SC_ID40_TEST extends ExtentTestNGReportBuilderExt{
 
 	}
 
-	//@Test( enabled = false)
-	@Test(dependsOnMethods = "availbilityTest")
-	public synchronized void testHotelCode() {
-
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Hotel Code ");
-		//result.setAttribute("Expected", "Hotel Code should be  : " + AviRequest.getCode()[0]);
-		result.setAttribute("Expected", "Hotel Code should be  : " + "7324");
-
-		if (AvailabilityResponse.getHotelList().containsKey("7324")) {
-			result.setAttribute("Actual", AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-		} else {
-			result.setAttribute("Actual", "User entered Hotel Code is not in the Response : Actual Hotel Code is " + AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-			Assert.fail("User entered Hotel Code is not in the Response:");
-		}
-
-	}
+	/*
+	 * //@Test( enabled = false)
+	 * 
+	 * @Test(dependsOnMethods = "availbilityTest") public synchronized void
+	 * testHotelCode() {
+	 * 
+	 * ITestResult result = Reporter.getCurrentTestResult();
+	 * result.setAttribute("TestName", "Testing Hotel Code ");
+	 * //result.setAttribute("Expected", "Hotel Code should be  : " +
+	 * AviRequest.getCode()[0]); result.setAttribute("Expected",
+	 * "Hotel Code should be  : " + "7324");
+	 * 
+	 * if (AvailabilityResponse.getHotelList().containsKey("7324")) {
+	 * result.setAttribute("Actual",
+	 * AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey()); }
+	 * else { result.setAttribute("Actual",
+	 * "User entered Hotel Code is not in the Response : Actual Hotel Code is " +
+	 * AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
+	 * Assert.fail("User entered Hotel Code is not in the Response:"); }
+	 * 
+	 * }
+	 */
 
 	@Test(dependsOnMethods = "availbilityTest")
 	public synchronized void testDayWiseRateAvailability() {
