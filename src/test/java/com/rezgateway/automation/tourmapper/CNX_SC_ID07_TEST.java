@@ -38,9 +38,9 @@ import com.rezgateway.automation.reports.ExtentTestNGReportBuilderExt;
 import com.rezgateway.automation.xmlout.utill.DataLoader;
 import com.rezgateway.automation.xmlout.utill.ExcelDataSingleton;
 
-////Cancellation scenario Confirmed within cancellation period
+////Cancellation scenario Confirmed within cancellation period most restrictive policy 3
 
-public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
+public class CNX_SC_ID07_TEST extends ExtentTestNGReportBuilderExt {
 	
 	AvailabilityResponse AvailabilityResponse = null;
 	ReservationRequest ResRequest = null;
@@ -59,7 +59,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 		//Within Cancellation period less than 10
 		  DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 		   LocalDateTime now = LocalDateTime.now();
-		   now= now.plusDays(9);//within cancel
+		   now= now.plusDays(65);//within cancel policy less than 70 days
 		   String newcheckin=dtf.format(now);
 		   now= now.plusDays(2);
 		   String newcheckout=dtf.format(now);
@@ -98,8 +98,18 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 				while (itr.hasNext()) {
 					Map.Entry<String, ArrayList<Room>> entry = (Map.Entry<String, ArrayList<Room>>) itr.next();
 					// String roomnum = entry.getKey().trim();
-
+					
 					Room room = entry.getValue().get(0);
+					
+					for (int j = 0; j < entry.getValue().size(); j++) {
+						
+					//for (Room  r : entry.getValue()) {
+						//System.out.println("asdsdsdsdsdsd"+r.getRoomType());
+						if("King".equals(entry.getValue().get(j).getRoomType())){
+							 room = entry.getValue().get(j);
+						}
+					}
+	
 					room.setAdultsCount(ResRequest.getRoomlist().get(i).getAdultsCount());
 					room.setChildCount(ResRequest.getRoomlist().get(i).getChildCount());
 					room.setChildAges(ResRequest.getRoomlist().get(i).getChildAges());
@@ -171,80 +181,11 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 
 	}
 
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void isAvailabileHotelNameInAviResponse() {
 
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Availability of the Hotel name in the response ");
-		result.setAttribute("Expected", "Hotel Hotel name Should be Available in the Response ");
 
-		if (!AvailabilityResponse.getHotelList().entrySet().iterator().next().getValue().getName().isEmpty()) {
-			result.setAttribute("Actual", "Hotel name is  : " + AvailabilityResponse.getHotelList().entrySet().iterator().next().getValue().getName());
-		} else {
-			result.setAttribute("Actual", "Hotel Short Description is not Available in the Response : " + AvailabilityResponse.getHotelList().entrySet().iterator().next().getValue().getName());
-			Assert.fail("Hotel name is not Available in the Response");
-		}
-
-	}
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void testHotelCodeInAviResponse() {
-
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Hotel Code ");
-		result.setAttribute("Expected", "CheckIN : " + ResRequest.getCode()[0]);
-
-		if (AvailabilityResponse.getHotelList().containsKey(ResRequest.getCode()[0])) {
-			result.setAttribute("Actual", AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-		} else {
-			result.setAttribute("Actual", "User entered Hotel Code is not in the Response : Actual Hotel Code is " + AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-			Assert.fail("User entered Hotel Code is not in the Response:");
-		}
-
-	}
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void testDayWiseRateAvailability() {
-
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Daily Rates having for Each date in the Response ");
-		result.setAttribute("Expected", "System shouls contain the  Daily Rate for each day");
-		try {
-
-			Hotel hotelInResponse = AvailabilityResponse.getHotelList().get(ResRequest.getCode()[0]);
-			Map<String, ArrayList<Room>> rooms = hotelInResponse.getRoomInfo();
-			TreeMap<String, DailyRates> dailyRates = new TreeMap<String, DailyRates>();
-			ArrayList<String> flag = new ArrayList<String>();
-
-			for (Room room : rooms.entrySet().iterator().next().getValue()) {
-
-				Map<String, RateplansInfo> RatesPlanInfos = room.getRatesPlanInfo();
-				dailyRates = RatesPlanInfos.entrySet().iterator().next().getValue().getDailyRates();
-
-				if (Integer.parseInt(ResRequest.getNoofNights()) == dailyRates.size()) {
-					flag.add("true");
-				} else {
-					flag.add("false");
-				}
-			}
-
-			if (flag.contains("false")) {
-				result.setAttribute("Actual", "Daily rates are not availble for Some room");
-				Assert.fail("Daily rates are not availble for Some room");
-			} else {
-				result.setAttribute("Actual", "Daily rates are availble for All the rooms in the Response ");
-			}
-
-		} catch (Exception e) {
-			System.out.println(e);
-			result.setAttribute("Actual", e);
-			Assert.fail("This testDayWiseRateAvailability is Failed due to :", e);
-		}
-
-	}
 	
 	// currently this test doing for static data
-	@Test(dependsOnMethods = "cancellationTesting")
+	@Test(dependsOnMethods = "cancellationTesting" ,priority = 2)
 	public synchronized void testCancellationPolicy() {
 
 		ITestResult result = Reporter.getCurrentTestResult();
@@ -268,13 +209,131 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 				
 				for(BookingPolicy bockingPolicy : r.getRoomPolicy() ){
 		
-					if(("2019-02-17".equals(bockingPolicy.getPolicyFrom())&&("2021-02-17".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
-					if("Cancel".equals(bockingPolicy.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
-					if("percentage".equals(bockingPolicy.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
-					if("10".equals(bockingPolicy.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));						
-					if(10==(bockingPolicy.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
-					if("$92.4".equals(bockingPolicy.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
-					if("$924.00".equals(bockingPolicy.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+					
+					if(r.getRoomType().equals("King")){
+						if(r.getRoomPolicy().size()==3){
+							
+							BookingPolicy bookingPolicy=r.getRoomPolicy().get(0);
+							BookingPolicy bookingPolicy1=r.getRoomPolicy().get(0);
+							BookingPolicy bookingPolicy2=r.getRoomPolicy().get(0);
+							BookingPolicy bookingPolicy3=r.getRoomPolicy().get(0);
+							
+							for (int i = 0; i < 3; i++) {
+								bookingPolicy=r.getRoomPolicy().get(i);
+								
+								if(70==(bookingPolicy.getArrivalRangeValue())){
+									bookingPolicy1 = r.getRoomPolicy().get(i);
+								}
+								else if (50==(bookingPolicy.getArrivalRangeValue())){
+									bookingPolicy2 = r.getRoomPolicy().get(i);
+								}
+								
+								else 
+									bookingPolicy3 = r.getRoomPolicy().get(i);
+								
+							}
+							
+							//BookingPolicy bookingPolicy1 = r.getRoomPolicy().get(1);
+							
+							if(("2019-02-14".equals(bookingPolicy1.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+							if("Cancel".equals(bookingPolicy1.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
+							if("percentage".equals(bookingPolicy1.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
+							if("50".equals(bookingPolicy1.getPolicyBasedOnValue())? flag.add("PolicyBasedOnValue_True"):flag.add("PolicyBasedOnValue_False"));
+							if("Less Than".equals(bookingPolicy1.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
+							if(70==(bookingPolicy1.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
+							if("$262.5".equals(bookingPolicy1.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+							if("$262.50".equals(bookingPolicy1.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+							
+							//BookingPolicy bookingPolicy2 = r.getRoomPolicy().get(0);
+							
+							if(("2019-02-14".equals(bookingPolicy2.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+							if("Cancel".equals(bookingPolicy2.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
+							if("percentage".equals(bookingPolicy2.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
+							if("100".equals(bookingPolicy2.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));
+							if("Less Than".equals(bookingPolicy2.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
+							if(50==(bookingPolicy2.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
+							if("$525.0".equals(bookingPolicy2.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+							if("$525.00".equals(bookingPolicy2.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+						
+							//BookingPolicy bookingPolicy3 = r.getRoomPolicy().get(2);
+							
+							if(("2019-02-14".equals(bookingPolicy3.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy3.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+							if("Cancel".equals(bookingPolicy3.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
+							if("percentage".equals(bookingPolicy3.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
+							if("80".equals(bookingPolicy3.getPolicyBasedOnValue())? flag.add("PolicyBasedOnValue_True"):flag.add("PolicyBasedOnValue_False"));
+							if("Less Than".equals(bookingPolicy3.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
+							if(60==(bookingPolicy3.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
+							if("$420.0".equals(bookingPolicy3.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+							if("$420.00".equals(bookingPolicy3.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+							
+							
+							
+						    
+						}
+						else {
+							result.setAttribute("Actual", " multiple policy not found for roomtype1");
+							flag.add("False");
+							Assert.fail("Cancellation policy not found ");
+						}
+							
+					}
+					
+					
+					else if(r.getRoomType().equals("HarborFront")){
+						if(r.getRoomPolicy().size()==2){
+							
+							BookingPolicy bookingPolicyr=r.getRoomPolicy().get(0);
+							BookingPolicy bookingPolicyr1=r.getRoomPolicy().get(0);
+							BookingPolicy bookingPolicyr2=r.getRoomPolicy().get(0);
+							
+							for (int i = 0; i < 2; i++) {
+								bookingPolicyr=r.getRoomPolicy().get(i);
+								
+								if(30==(bookingPolicyr.getArrivalRangeValue())){
+									bookingPolicyr1 = r.getRoomPolicy().get(i);
+								}
+								else
+									bookingPolicyr2 = r.getRoomPolicy().get(i);
+							}
+							
+							//BookingPolicy bookingPolicyr1 = r.getRoomPolicy().get(1);
+							
+							if(("2019-02-14".equals(bookingPolicyr1.getPolicyFrom())&&("2020-02-14".equals(bookingPolicyr1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+							if("Cancel".equals(bookingPolicyr1.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
+							if("nights".equals(bookingPolicyr1.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
+							if("1".equals(bookingPolicyr1.getPolicyBasedOnValue())? flag.add("PolicyBasedOnValue_True"):flag.add("PolicyBasedOnValue_False"));
+							if("Less Than".equals(bookingPolicyr1.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
+							if(30==(bookingPolicyr1.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
+							if("$315.0".equals(bookingPolicyr1.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+							if("$630.00".equals(bookingPolicyr1.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+							
+							//BookingPolicy bookingPolicyr2 = r.getRoomPolicy().get(0);
+							
+							if(("2019-02-14".equals(bookingPolicyr2.getPolicyFrom())&&("2020-02-14".equals(bookingPolicyr2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+							if("Cancel".equals(bookingPolicyr2.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
+							if("value".equals(bookingPolicyr2.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
+							if("100.00".equals(bookingPolicyr2.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));
+							if("Any".equals(bookingPolicyr2.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
+							if(0==(bookingPolicyr2.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
+							if("$100.00".equals(bookingPolicyr2.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+							if("$100.00".equals(bookingPolicyr2.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+								
+							
+						    
+						}
+						else {
+							result.setAttribute("Actual", " multiple policy not found for roomtype2");
+							flag.add("False");
+							Assert.fail("Cancellation policy not found ");
+						}
+					}
+					
+					else {
+						result.setAttribute("Actual", " no room type found ");
+						flag.add("False");
+						Assert.fail("Cancellation policy not found belong to this room");
+					}
+				
 				}
 				
 			}
@@ -305,7 +364,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 		result.setAttribute("Expected", "Cancellation fee Should be Applyed according to the CNX policy");
 	
 	try {
-			if(("92.4").equals(cnxR.getCanellationFee())){
+			if(("262.5").equals(cnxR.getCanellationFee())){
 				result.setAttribute("Actual", " Standard Cancellation Fee is Correct ");
 			}else{
 				result.setAttribute("Actual", " Standard Cancellation Fee is inCorrect ");
@@ -322,156 +381,8 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 	}
 	
 	
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void testNumOfRoomsAvailbility() {
 
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing NumOfRooms Availbility in the Response ");
-		result.setAttribute("Expected", "Response's room count should equal to requested Room count ");
-		try {
-
-			Hotel hotelInResponse = AvailabilityResponse.getHotelList().get(ResRequest.getCode()[0]);
-			Map<String, ArrayList<Room>> rooms = hotelInResponse.getRoomInfo();
-			if (Integer.parseInt(ResRequest.getNoOfRooms()) == rooms.entrySet().size()) {
-				result.setAttribute("Actual", "No of Rooms are Correctly Exsist in the Availability Response");
-			} else {
-				result.setAttribute("Actual", "Response's Room count is not equal to the Reqested Room count");
-				Assert.fail("Response's Room count is not equal to the Reqested Room count");
-			}
-		} catch (Exception e) {
-			result.setAttribute("Actual", e);
-			Assert.fail("This testNumOfRoomsAvailbility is Failed due to :", e);
-		}
-	}
-	
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void isReferenceNoAvailable() {
-
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Reservation no Availbility in the Reservation Response ");
-		result.setAttribute("Expected", "If Reservation Response status is Y then Response should exsit the Reservation NO ");
-		try {
-			if (ResResponse.getReferenceno().contains("X")) {
-				result.setAttribute("Actual", "Reservation number is availabile in the  Response  : " + ResResponse.getReferenceno());
-			} else {
-				result.setAttribute("Actual", "Reservation number is not availabile in the Reservation Response");
-				Assert.fail("Reservation number is not availabile in the Reservation Response");
-			}
-		} catch (Exception e) {
-			result.setAttribute("Actual", e);
-			Assert.fail("This isReferenceNoAvailable is Failed due to :", e);
-		}
-	}
-	
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void isRoomReferenceNoAvailbility() {
-
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing RoomReferenceNo Availbility for Each Room in the Reservation Response ");
-		result.setAttribute("Expected", "If Reservation Response status is Y then Response should exsit the Reservation NO ");
-		try {
-			ArrayList<Room> bookedRooms = ResResponse.getRoomlist();
-			ArrayList<String> flag = new ArrayList<String>();
-			for (Room r : bookedRooms) {
-				if (null != r.getRoomResNo() ? flag.add("True") : flag.add("False"));
-			}
-			if (flag.contains("false")) {
-				result.setAttribute("Actual", "Reservation number is not availabile in the Reservation Response");
-				Assert.fail("Reservation number is not availabile in the Reservation Response");
-
-			} else {
-				result.setAttribute("Actual", "Room Reservation number is availabile in the  Response");
-			}
-
-		} catch (Exception e) {
-			result.setAttribute("Actual", e);
-			Assert.fail("This isReferenceNoAvailable is Failed due to :", e);
-		}
-	}
-	
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void testHotelCodeInReservationResponse() {
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Hotel Code is Correctly in the Reservation Response");
-		result.setAttribute("Expected", "Hotel Code should be Same as the Resqested hotel Code  ");
-		try {
-			if (ResResponse.getBookedHotelCode().equals(ResRequest.getCode()[0])) {
-				result.setAttribute("Actual", "Hotel Code is Same in the Reservation Response");
-			} else {
-				result.setAttribute("Actual", "Hotel code is Different or not in the Response");
-				Assert.fail("Hotel code is not Different or not in the Response");
-			}
-		} catch (Exception e) {
-			result.setAttribute("Actual", "testHotelCodeInReservationResponse is Failed due to : " + e);
-			Assert.fail("Hotel code is not Different or not in the Response due to : ", e);
-		}
-
-	}
-	
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void testHotelConfirmationType() {
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing ConfirmationType in the Reservation Response ");
-		result.setAttribute("Expected", "This Booking should be in Confirmation Status");
-		try {
-
-			if (ConfirmationType.CON == ResResponse.getConfType()) {
-				result.setAttribute("Actual", "Test is Failed passed due to Confiramtion Type is CON ");
-			} else {
-				result.setAttribute("Actual", "Test is Failed due to Confiramtion Type is : " + ResResponse.getReservationstatus());
-				Assert.fail("Test is Failed due to Confiramtion Type is : " + ResResponse.getConfType());
-			}
-
-		} catch (Exception e) {
-			result.setAttribute("Actual", " testHotelConfirmationType is Failed due to : " + e);
-			Assert.fail(" testHotelConfirmationType is Failed due to : ", e);
-		}
-	}
-	
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void testTotalValue() {
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Test Total value is Correctly Exsist in the Reservation Response");
-		result.setAttribute("Expected", "Total rate should be same as to Reqested Total Value");
-	try {
-			if ((ResRequest.getTotal()).equals(ResResponse.getTotal())) {
-				result.setAttribute("Actual", " Test Pased : Total rate equal to Reqested Total Value");
-			} else {
-				result.setAttribute("Actual", "Total value is Difference than requested.--->  Actual Value : " + ResResponse.getTotal() + " / Expected Value : " + ResRequest.getTotal());
-				Assert.fail("Total value is Difference than requested ");
-			}
-		} catch (Exception e) {
-			result.setAttribute("Actual", "testTotalValue  is Failed due to  : " + e);
-			Assert.fail("testTotalValue  is Failed due to  : ", e);
-		}
-	}
-	
-
-	@Test(dependsOnMethods = "cancellationTesting")
-	public synchronized void testTotalTaxValue() {
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Test Total Tax value is Correctly Exsist in the Reservation Response");
-		result.setAttribute("Expected", "Total Tax should be same as to Reqested Total Value");
-		try {
-			if ((ResRequest.getTotalTax()+"0").equals(ResResponse.getTotalTax())) {
-				result.setAttribute("Actual", " Test Pased : Total Tax equal to Reqested Total Tax");
-			} else {
-				result.setAttribute("Actual", "Total Tax is Difference than requested > : Actual TAX Value : " + ResResponse.getTotalTax() + " / Expected Value : " + ResRequest.getTotalTax());
-				Assert.fail("Total Tax is Difference than requested ");
-			}
-		} catch (Exception e) {
-			result.setAttribute("Actual", "testTotalTaxValue  is Failed due to  : " + e);
-			Assert.fail("testTotalTaxValue  is Failed due to  : ", e);
-		}
-	}
-	
-
-	@Test(dependsOnMethods = "cancellationTesting")
+	@Test(dependsOnMethods = "cancellationTesting",priority = 1)
 	public synchronized void isHotelOnRequestedAviResponse() {
 
 		ITestResult result = Reporter.getCurrentTestResult();
@@ -505,7 +416,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 	public ReservationRequest getAvailabilityData() throws Exception {
 
 		DataLoader loader = new DataLoader();
-		ResRequest = loader.getReservationReqObjList(ExcelDataSingleton.getInstance("Resources/Full Regression Testing Checklist.xls", "Scenario").getDataHolder())[65][0];
+		ResRequest = loader.getReservationReqObjList(ExcelDataSingleton.getInstance("Resources/Full Regression Testing Checklist.xls", "Scenario").getDataHolder())[70][0];
 		return ResRequest;
 
 	}
