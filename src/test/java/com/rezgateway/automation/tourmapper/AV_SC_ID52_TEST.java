@@ -27,7 +27,7 @@ import com.rezgateway.automation.reports.ExtentTestNGReportBuilderExt;
 import com.rezgateway.automation.xmlout.utill.DataLoader;
 import com.rezgateway.automation.xmlout.utill.ExcelDataSingleton;
 
-public class AV_SC_ID52_TEST extends ExtentTestNGReportBuilderExt{
+public class AV_SC_ID52_TEST extends ExtentTestNGReportBuilderExt {
 
 	AvailabilityResponse AvailabilityResponse = new AvailabilityResponse();
 	AvailabilityRequest AviRequest = new AvailabilityRequest();

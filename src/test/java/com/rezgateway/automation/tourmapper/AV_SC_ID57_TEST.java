@@ -212,7 +212,27 @@ public class AV_SC_ID57_TEST {
 			if(r.getRoomType().equals("King")){
 				if(r.getRoomPolicy().size()==3){
 					
-					BookingPolicy bookingPolicy1 = r.getRoomPolicy().get(1);
+					BookingPolicy bookingPolicy=r.getRoomPolicy().get(0);
+					BookingPolicy bookingPolicy1=r.getRoomPolicy().get(0);
+					BookingPolicy bookingPolicy2=r.getRoomPolicy().get(0);
+					BookingPolicy bookingPolicy3=r.getRoomPolicy().get(0);
+					
+					for (int i = 0; i < 3; i++) {
+						bookingPolicy=r.getRoomPolicy().get(i);
+						
+						if(70==(bookingPolicy.getArrivalRangeValue())){
+							bookingPolicy1 = r.getRoomPolicy().get(i);
+						}
+						else if (50==(bookingPolicy.getArrivalRangeValue())){
+							bookingPolicy2 = r.getRoomPolicy().get(i);
+						}
+						
+						else 
+							bookingPolicy3 = r.getRoomPolicy().get(i);
+						
+					}
+					
+					//BookingPolicy bookingPolicy1 = r.getRoomPolicy().get(1);
 					
 					if(("2019-02-14".equals(bookingPolicy1.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicy1.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
@@ -223,7 +243,7 @@ public class AV_SC_ID57_TEST {
 					if("$262.5".equals(bookingPolicy1.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
 					if("$262.50".equals(bookingPolicy1.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 					
-					BookingPolicy bookingPolicy2 = r.getRoomPolicy().get(0);
+					//BookingPolicy bookingPolicy2 = r.getRoomPolicy().get(0);
 					
 					if(("2019-02-14".equals(bookingPolicy2.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicy2.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
@@ -234,7 +254,7 @@ public class AV_SC_ID57_TEST {
 					if("$525.0".equals(bookingPolicy2.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
 					if("$525.00".equals(bookingPolicy2.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 				
-					BookingPolicy bookingPolicy3 = r.getRoomPolicy().get(2);
+					//BookingPolicy bookingPolicy3 = r.getRoomPolicy().get(2);
 					
 					if(("2019-02-14".equals(bookingPolicy3.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy3.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicy3.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
@@ -261,7 +281,21 @@ public class AV_SC_ID57_TEST {
 			else if(r.getRoomType().equals("HarborFront")){
 				if(r.getRoomPolicy().size()==2){
 					
-					BookingPolicy bookingPolicyr1 = r.getRoomPolicy().get(0);
+					BookingPolicy bookingPolicyr=r.getRoomPolicy().get(0);
+					BookingPolicy bookingPolicyr1=r.getRoomPolicy().get(0);
+					BookingPolicy bookingPolicyr2=r.getRoomPolicy().get(0);
+					
+					for (int i = 0; i < 2; i++) {
+						bookingPolicyr=r.getRoomPolicy().get(i);
+						
+						if(30==(bookingPolicyr.getArrivalRangeValue())){
+							bookingPolicyr1 = r.getRoomPolicy().get(i);
+						}
+						else
+							bookingPolicyr2 = r.getRoomPolicy().get(i);
+					}
+					
+					//BookingPolicy bookingPolicyr1 = r.getRoomPolicy().get(1);
 					
 					if(("2019-02-14".equals(bookingPolicyr1.getPolicyFrom())&&("2020-02-14".equals(bookingPolicyr1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicyr1.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
@@ -272,7 +306,7 @@ public class AV_SC_ID57_TEST {
 					if("$315.0".equals(bookingPolicyr1.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
 					if("$630.00".equals(bookingPolicyr1.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 					
-					BookingPolicy bookingPolicyr2 = r.getRoomPolicy().get(1);
+					//BookingPolicy bookingPolicyr2 = r.getRoomPolicy().get(0);
 					
 					if(("2019-02-14".equals(bookingPolicyr2.getPolicyFrom())&&("2020-02-14".equals(bookingPolicyr2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicyr2.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
@@ -301,7 +335,6 @@ public class AV_SC_ID57_TEST {
 		
 		}
 			String check =flag.toString();
-			System.out.println(check);
 			if (check.contains("False")) {
 				result.setAttribute("Actual", " Cancellation is wrong " );
 				Assert.fail("Cancellation is wrong ");
