@@ -30,7 +30,7 @@ import com.rezgateway.automation.reader.response.AvailabilityResponseReader;
 import com.rezgateway.automation.reports.ExtentTestNGReportBuilderExt;
 import com.rezgateway.automation.xmlout.utill.DataLoader;
 import com.rezgateway.automation.xmlout.utill.ExcelDataSingleton;
-
+//Free Night Promotion for all rooms
 public class AV_SC_ID58_TEST extends ExtentTestNGReportBuilderExt{
 
 	AvailabilityResponse AvailabilityResponse = new AvailabilityResponse();
