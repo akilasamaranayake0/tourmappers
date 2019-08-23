@@ -31,7 +31,7 @@ public class AV_SC_ID47_TEST extends ExtentTestNGReportBuilderExt{
 
 	@Parameters("TestUrl")
 	@Test(priority = 0)
-	public synchronized void availbilityTest(String TestUrl) throws Exception {
+	public synchronized void availbilityTestForBlackoutCondition(String TestUrl) throws Exception {
 
 		getAvailabilityData();
 		
@@ -51,12 +51,11 @@ public class AV_SC_ID47_TEST extends ExtentTestNGReportBuilderExt{
 
 			AvailabilityResponse = new AvailabilityResponseReader().getResponse(Response.getRESPONSE());
 
-			if (AvailabilityResponse.getHotelCount() > 0) {
-				result.setAttribute("Actual", "Results Available then Test is fail , Hotel Count :" + AvailabilityResponse.getHotelCount());
-				Assert.fail("Results are availble then Test is fail	");
+			if ("A6".equals(AvailabilityResponse.getErrorCode())) {
+				result.setAttribute("Actual", "Results not available :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
 			} else {
-				result.setAttribute("Actual", "Results not available Error Code then Test is Pass  :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
-				
+				result.setAttribute("Actual", " Error occured -  Blackout condition is not apply for this hotel " );
+				Assert.fail(" Error occured -  Blackout condition is not apply for this hotel ");	
 			}
 		} else {
 			result.setAttribute("Actual", "No Response recieved Code :" + Response.getRESPONSE_CODE());
