@@ -31,8 +31,6 @@ public class AV_SC_ID51_TEST extends ExtentTestNGReportBuilderExt{
 
 	AvailabilityResponse AvailabilityResponse = new AvailabilityResponse();
 	AvailabilityRequest AviRequest = new AvailabilityRequest();
-
-	
 	
 	//Hotel id Search – Applying Promotions (Free Night)
 
@@ -85,22 +83,7 @@ public class AV_SC_ID51_TEST extends ExtentTestNGReportBuilderExt{
 		}
 
 	}
-
-	@Test(dependsOnMethods = "availbilityTest")
-	public synchronized void testHotelCode() {
-
-		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing Hotel Code ");
-		result.setAttribute("Expected", "Hotel Code should be  : " + AviRequest.getCode()[0]);
-
-		if (AvailabilityResponse.getHotelList().containsKey(AviRequest.getCode()[0])) {
-			result.setAttribute("Actual", AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-		} else {
-			result.setAttribute("Actual", "User entered Hotel Code is not in the Response : Actual Hotel Code is " + AvailabilityResponse.getHotelList().entrySet().iterator().next().getKey());
-			Assert.fail("User entered Hotel Code is not in the Response:");
-		}
-
-	}
+	
 
 	@Test(dependsOnMethods = "availbilityTest")
 	public synchronized void testDayWiseRateAvailability() {
@@ -143,61 +126,125 @@ public class AV_SC_ID51_TEST extends ExtentTestNGReportBuilderExt{
 	}
 	
 	@Test(dependsOnMethods = "availbilityTest")
-	public synchronized void testNumOfRoomsAvailbility() {
+	public synchronized void testPrmotionCodeAvailability() {
 
 		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing NumOfRooms Availbility in the Response ");
-		result.setAttribute("Expected", "Response's room count should equal to requested Room count ");
+		result.setAttribute("TestName", "Testing the availability of Free night promotion code in the Response ");
+		result.setAttribute("Expected", "Respone should contain a free night promotion code");
+		boolean isPromoAvail = false;
+		
+		String expRoomType = "1 Bdrm City View";
+		String expRatePlan ="with CONT with 5 pax";
+		String expPromocode = "Stay 3 pay 2";
+		
 		try {
 
 			Hotel hotelInResponse = AvailabilityResponse.getHotelList().entrySet().iterator().next().getValue();
+			
 			Map<String, ArrayList<Room>> rooms = hotelInResponse.getRoomInfo();
-			if (Integer.parseInt(AviRequest.getNoOfRooms()) == rooms.entrySet().size()) {
-				result.setAttribute("Actual", "No of Rooms are Correctly Exsist in the Availability Response");
-			} else {
-				result.setAttribute("Actual", "Response's Room count is not equal to the Reqested Room count");
-				Assert.fail("Response's Room count is not equal to the Reqested Room count");
+			
+			for (Room room : rooms.entrySet().iterator().next().getValue()) {
+				Map<String, RateplansInfo> RatesPlanInfos = room.getRatesPlanInfo();
+				
+				String roomType = room.getRoomType();
+				String ratePlan = RatesPlanInfos.entrySet().iterator().next().getValue().getRatePlan();
+				String promoCode = room.getPromotionCode();
+				
+				if(expRoomType.equals(roomType) && expRatePlan.equals(ratePlan) && expPromocode.equals(promoCode)) {
+					isPromoAvail = true;
+				}
 			}
+
+			if (isPromoAvail) {
+				result.setAttribute("Actual", "Free Night promotion code : " + expPromocode + " is availble for room type : " + expRoomType + " ~ Rate Plan : " + expRatePlan);
+			} else {
+				result.setAttribute("Actual", "Free Night promotion code : " + expPromocode + " is not availble for room type : " + expRoomType + " ~ Rate Plan : " + expRatePlan);
+				Assert.fail("Fail : Free Night promotion is not availble for the specific room");
+			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 			result.setAttribute("Actual", e);
-			Assert.fail("This testNumOfRoomsAvailbility is Failed due to :", e);
+			Assert.fail("This testPrmotionCodeAvailability is Failed due to :", e);
 		}
+
 	}
 	
-	@Test(dependsOnMethods = "availbilityTest")
-	public synchronized void isHotelOnRequested(){
+	@Test(dependsOnMethods = "testPrmotionCodeAvailability")
+	public synchronized void testFreeNightsAvailability() {
 
 		ITestResult result = Reporter.getCurrentTestResult();
-		result.setAttribute("TestName", "Testing is this Hotel on OnRequest status For this Checkin Checkout dates ");
-		result.setAttribute("Expected", "This Hotel Should not on OnRequest status For this Checkin Checkout dates ");
-		try{
+		result.setAttribute("TestName", "Testing the Maximum No of Free nights condition in the Response ");
+		result.setAttribute("Expected", "Respone should contain correct number of free nights");
+		ArrayList<String> flag = new ArrayList<String>();
+		boolean isTCPass = false;
+		
+		String expRoomType = "1 Bdrm City View";
+		String expRatePlan ="with CONT with 5 pax";
+		String expBedType = "Single";
+		//int maxNights = 2;
+		int noOfnights = 0;
+		
+		try {
+
 			Hotel hotelInResponse = AvailabilityResponse.getHotelList().entrySet().iterator().next().getValue();
+			
 			Map<String, ArrayList<Room>> rooms = hotelInResponse.getRoomInfo();
-			ArrayList<String> flag = new ArrayList<String>();
-			for(Room r : rooms.entrySet().iterator().next().getValue() ){
-				if(ConfirmationType.CON == r.getConType()){
-					flag.add("CON");
-				}else {
-					flag.add("REQ");
+			TreeMap<String, DailyRates> dailyRates = new TreeMap<String, DailyRates>();
+			
+			for (Room room : rooms.entrySet().iterator().next().getValue()) {
+				Map<String, RateplansInfo> RatesPlanInfos = room.getRatesPlanInfo();
+				
+				String roomType = room.getRoomType();
+				String ratePlan = RatesPlanInfos.entrySet().iterator().next().getValue().getRatePlan();
+				String bedType = room.getBedType();
+				
+				if(expRoomType.equals(roomType) && expRatePlan.equals(ratePlan) && expBedType.equals(bedType)) {
+					dailyRates = RatesPlanInfos.entrySet().iterator().next().getValue().getDailyRates();
+					noOfnights = dailyRates.size();
+					
+					for(Map.Entry<String,DailyRates> dailyRate : dailyRates.entrySet()) {
+						DailyRates dailyRatesObject = dailyRate.getValue();
+						double total = dailyRatesObject.getTotal();
+										
+						if(total == 0) {
+							flag.add("FN");
+						}
+						
+					}
 				}
 			}
-			if (flag.contains("REQ")) {
-				result.setAttribute("Actual", "Some Hotel rooms are On requested ");
-				Assert.fail("Some Hotel rooms are On requested ");
-			} else {
-				result.setAttribute("Actual", "All hotel Rooms Confirmation status is CON ");
+
+			if(noOfnights < 3) {
+				if (flag.size() == 0) {
+					isTCPass = true;
+				}
+			}if(noOfnights >= 3 && noOfnights < 6) {
+				if (flag.contains("FN") && flag.size() == 1) {
+					isTCPass = true;
+				}
+			}else if (noOfnights >= 6) {
+				if (flag.contains("FN") && flag.size() == 2) {
+					isTCPass = true;
+				}
 			}
+				
 			
-			
-		}catch(Exception e){
+			if (isTCPass) {
+				result.setAttribute("Actual", "No of Free Nights availble for room type : " + expRoomType + " ~ Rate Plan : " + expRatePlan + "~ BedType : " + expBedType + " ~ for Number of Nights : " + noOfnights + " is : " + flag.size());
+			} else {
+				result.setAttribute("Actual", "No of Free Nights availble for room type : " + expRoomType + " ~ Rate Plan : " + expRatePlan + "~ BedType : " + expBedType + " ~ for Number of Nights : " + noOfnights + " is : " + flag.size());
+				Assert.fail("Fail : Free Nights are not availble for the specific room");
+			}
+
+		} catch (Exception e) {
 			System.out.println(e);
 			result.setAttribute("Actual", e);
-			Assert.fail("This testNumOfRoomsAvailbility is Failed due to :", e);
+			Assert.fail("This testFreeNightsAvailability is Failed due to :", e);
 		}
-		
-		
+
 	}
+	
 	
 	public AvailabilityRequest getAvailabilityData() throws Exception {
 
