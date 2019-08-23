@@ -51,11 +51,11 @@ public class AV_SC_ID49_TEST extends ExtentTestNGReportBuilderExt{
 
 			AvailabilityResponse = new AvailabilityResponseReader().getResponse(Response.getRESPONSE());
 
-			if (AvailabilityResponse.getHotelCount() > 0) {
+			if ("A6".equals(AvailabilityResponse.getErrorCode())) {
+				result.setAttribute("Actual", "Results not available :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
+			} else {
 				result.setAttribute("Actual", " Error occured -  Minnight condition is not apply for this hotel " );
 				Assert.fail(" Error occured -  Minnight condition is not apply for this hotel ");
-			} else {
-				result.setAttribute("Actual", "Results not available :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
 			}
 		} else {
 			result.setAttribute("Actual", "No Response recieved Code :" + Response.getRESPONSE_CODE());

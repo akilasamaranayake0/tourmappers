@@ -29,7 +29,7 @@ public class AV_SC_ID50_TEST extends ExtentTestNGReportBuilderExt{
 	//Hotel id Search – Max Nights
 	@Parameters("TestUrl")
 	@Test(priority = 0)
-	public synchronized void availbilityTestForMinNightCondition(String TestUrl) throws Exception {
+	public synchronized void availbilityTestForMaxNightCondition(String TestUrl) throws Exception {
 
 		getAvailabilityData();
 		
@@ -49,11 +49,11 @@ public class AV_SC_ID50_TEST extends ExtentTestNGReportBuilderExt{
 
 			AvailabilityResponse = new AvailabilityResponseReader().getResponse(Response.getRESPONSE());
 
-			if (AvailabilityResponse.getHotelCount() > 0) {
+			if ("A6".equals(AvailabilityResponse.getErrorCode())) {
+				result.setAttribute("Actual", "Results not available :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
+			} else {
 				result.setAttribute("Actual", " Error occured -  Maxnight condition is not apply for this hotel " );
 				Assert.fail(" Error occured -  Maxnight condition is not apply for this hotel ");
-			} else {
-				result.setAttribute("Actual", "Results not available :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
 			}
 		} else {
 			result.setAttribute("Actual", "No Response recieved Code :" + Response.getRESPONSE_CODE());

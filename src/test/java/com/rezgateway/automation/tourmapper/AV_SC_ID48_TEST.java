@@ -28,9 +28,10 @@ public class AV_SC_ID48_TEST extends ExtentTestNGReportBuilderExt{
 	
 	//Hotel id Search for No Arrival date
 
+
 	@Parameters("TestUrl")
 	@Test(priority = 0)
-	public synchronized void availbilityTest(String TestUrl) throws Exception {
+	public synchronized void availbilityTestForNoArrivalCondition(String TestUrl) throws Exception {
 
 		getAvailabilityData();
 		
@@ -40,8 +41,8 @@ public class AV_SC_ID48_TEST extends ExtentTestNGReportBuilderExt{
 		
 		ITestResult result = Reporter.getCurrentTestResult();
 		String testname = "Test Scenario:" + Scenario + " : Search By : " + AviRequest.getSearchType() + " Code : " + HotelCode+ "Criteria : "+SearchString;
-		result.setAttribute("TestName", " Testing the Blackout is Working correctly for this hotel " + testname );
-		result.setAttribute("Expected", " Results Should not be available Due to No Arrival date ");
+		result.setAttribute("TestName", " Testing the Hotel No Arrival date is Working correctly for this hotel " + testname );
+		result.setAttribute("Expected", " Results Should NOT be available Due to Hotel No Arrival date ");
 
 		JavaHttpHandler handler = new JavaHttpHandler();
 		HttpResponse Response = handler.sendPOST(TestUrl, "xml=" + new AvailabilityRequestBuilder().buildRequest("Resources/RegressionSuite_AvailRequest_senarioID_" + AviRequest.getScenarioID() + ".xml", AviRequest));
@@ -50,12 +51,11 @@ public class AV_SC_ID48_TEST extends ExtentTestNGReportBuilderExt{
 
 			AvailabilityResponse = new AvailabilityResponseReader().getResponse(Response.getRESPONSE());
 
-			if (AvailabilityResponse.getHotelCount() > 0) {
-				result.setAttribute("Actual", "Results Available then Test is fail , Hotel Count :" + AvailabilityResponse.getHotelCount());
-				Assert.fail("Results are availble then Test is fail	");
+			if ("A6".equals(AvailabilityResponse.getErrorCode())) {
+				result.setAttribute("Actual", "Results not available :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
 			} else {
-				result.setAttribute("Actual", "Results not available Error Code then Test is Pass  :" + AvailabilityResponse.getErrorCode() + " Error Desc :" + AvailabilityResponse.getErrorDescription());
-				
+				result.setAttribute("Actual", " Error occured -  No Arrival condition is not apply for this hotel " );
+				Assert.fail(" Error occured -  No Arrival condition is not apply for this hotel ");	
 			}
 		} else {
 			result.setAttribute("Actual", "No Response recieved Code :" + Response.getRESPONSE_CODE());
@@ -63,9 +63,10 @@ public class AV_SC_ID48_TEST extends ExtentTestNGReportBuilderExt{
 		}
 	}
 
+	
 
 	public AvailabilityRequest getAvailabilityData() throws Exception {
-		
+
 		DataLoader loader = new DataLoader();
 		AviRequest = loader.getReservationReqObjList(ExcelDataSingleton.getInstance("Resources/Full Regression Testing Checklist.xls", "Scenario").getDataHolder())[47][0];
 		return AviRequest;
