@@ -199,7 +199,7 @@ public class CNX_SC_ID04_TEST extends ExtentTestNGReportBuilderExt {
 				
 				for(BookingPolicy bockingPolicy : r.getRoomPolicy() ){
 		
-					if(("2019-02-17".equals(bockingPolicy.getPolicyFrom())&&("2021-02-17".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-17".equals(bockingPolicy.getPolicyFrom())&&("2058-02-17".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bockingPolicy.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("percentage".equals(bockingPolicy.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("10".equals(bockingPolicy.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));						

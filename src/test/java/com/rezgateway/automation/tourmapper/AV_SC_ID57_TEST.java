@@ -234,36 +234,36 @@ public class AV_SC_ID57_TEST {
 					
 					//BookingPolicy bookingPolicy1 = r.getRoomPolicy().get(1);
 					
-					if(("2019-02-14".equals(bookingPolicy1.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-14".equals(bookingPolicy1.getPolicyFrom())&&("2058-02-14".equals(bookingPolicy1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicy1.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("percentage".equals(bookingPolicy1.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("50".equals(bookingPolicy1.getPolicyBasedOnValue())? flag.add("PolicyBasedOnValue_True"):flag.add("PolicyBasedOnValue_False"));
 					if("Less Than".equals(bookingPolicy1.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
 					if(70==(bookingPolicy1.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
-					if("$262.5".equals(bookingPolicy1.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
-					if("$262.50".equals(bookingPolicy1.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+					if("$262.0".equals(bookingPolicy1.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+					if("$262.00".equals(bookingPolicy1.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 					
 					//BookingPolicy bookingPolicy2 = r.getRoomPolicy().get(0);
 					
-					if(("2019-02-14".equals(bookingPolicy2.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-14".equals(bookingPolicy2.getPolicyFrom())&&("2058-02-14".equals(bookingPolicy2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicy2.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("percentage".equals(bookingPolicy2.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("100".equals(bookingPolicy2.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));
 					if("Less Than".equals(bookingPolicy2.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
 					if(50==(bookingPolicy2.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
-					if("$525.0".equals(bookingPolicy2.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
-					if("$525.00".equals(bookingPolicy2.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+					if("$524.0".equals(bookingPolicy2.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+					if("$524.00".equals(bookingPolicy2.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 				
 					//BookingPolicy bookingPolicy3 = r.getRoomPolicy().get(2);
 					
-					if(("2019-02-14".equals(bookingPolicy3.getPolicyFrom())&&("2020-02-14".equals(bookingPolicy3.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-14".equals(bookingPolicy3.getPolicyFrom())&&("2058-02-14".equals(bookingPolicy3.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicy3.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("percentage".equals(bookingPolicy3.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("80".equals(bookingPolicy3.getPolicyBasedOnValue())? flag.add("PolicyBasedOnValue_True"):flag.add("PolicyBasedOnValue_False"));
 					if("Less Than".equals(bookingPolicy3.getArrivalRange())? flag.add("ArrivalRange_True"):flag.add("ArrivalRange_False"));
 					if(60==(bookingPolicy3.getArrivalRangeValue()) ? (flag.add("getArrivalRangeValue_True")):(flag.add("getArrivalRange_False")));
-					if("$420.0".equals(bookingPolicy3.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
-					if("$420.00".equals(bookingPolicy3.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
+					if("$419.2".equals(bookingPolicy3.getPolicyFee()) ? flag.add("PolicyFee_True") : flag.add("PolicyFee_True"));
+					if("$419.20".equals(bookingPolicy3.getNoShowPolicyFee()) ? flag.add("NoShowPolicyFee_True") : flag.add("NoShowPolicyFee_False")  );
 					
 					
 					
@@ -297,7 +297,7 @@ public class AV_SC_ID57_TEST {
 					
 					//BookingPolicy bookingPolicyr1 = r.getRoomPolicy().get(1);
 					
-					if(("2019-02-14".equals(bookingPolicyr1.getPolicyFrom())&&("2020-02-14".equals(bookingPolicyr1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-14".equals(bookingPolicyr1.getPolicyFrom())&&("2058-02-14".equals(bookingPolicyr1.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicyr1.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("nights".equals(bookingPolicyr1.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("1".equals(bookingPolicyr1.getPolicyBasedOnValue())? flag.add("PolicyBasedOnValue_True"):flag.add("PolicyBasedOnValue_False"));
@@ -308,7 +308,7 @@ public class AV_SC_ID57_TEST {
 					
 					//BookingPolicy bookingPolicyr2 = r.getRoomPolicy().get(0);
 					
-					if(("2019-02-14".equals(bookingPolicyr2.getPolicyFrom())&&("2020-02-14".equals(bookingPolicyr2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-14".equals(bookingPolicyr2.getPolicyFrom())&&("2058-02-14".equals(bookingPolicyr2.getPolicyTo())))? flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bookingPolicyr2.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("value".equals(bookingPolicyr2.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("100.00".equals(bookingPolicyr2.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));
