@@ -112,6 +112,7 @@ public class AV_SC_ID14_TEST extends ExtentTestNGReportBuilderExt{
 			Assert.fail("Hotel thumbNail Url is not Available in the Response");
 		}
 
+		
 	}
 
 	@Test(dependsOnMethods = "isAvailableThumbNailUrl")
