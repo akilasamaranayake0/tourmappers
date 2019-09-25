@@ -268,7 +268,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 				
 				for(BookingPolicy bockingPolicy : r.getRoomPolicy() ){
 		
-					if(("2019-02-17".equals(bockingPolicy.getPolicyFrom())&&("2021-02-17".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
+					if(("2019-02-17".equals(bockingPolicy.getPolicyFrom())&&("2058-02-17".equals(bockingPolicy.getPolicyTo())))?flag.add("PolicyFromAndTo_True") : flag.add("PolicyFromAndTo_False"));
 					if("Cancel".equals(bockingPolicy.getAmendmentType())? flag.add("AmendmentType_True") : flag.add("AmendmentType_False"));
 					if("percentage".equals(bockingPolicy.getPolicyBasedOn())? flag.add("PolicyBasedOn_True") : flag.add("PolicyBasedOn_False"));
 					if("10".equals(bockingPolicy.getPolicyBasedOnValue())? flag.add("PolicyBasedOn_True"):flag.add("PolicyBasedOn_False"));						
@@ -391,8 +391,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 		}
 	}
 	
-
-	@Test(dependsOnMethods = "cancellationTesting")
+	@Test( enabled = false)
 	public synchronized void testHotelCodeInReservationResponse() {
 		ITestResult result = Reporter.getCurrentTestResult();
 		result.setAttribute("TestName", "Testing Hotel Code is Correctly in the Reservation Response");
@@ -412,7 +411,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 	}
 	
 
-	@Test(dependsOnMethods = "cancellationTesting")
+	@Test( enabled = false)
 	public synchronized void testHotelConfirmationType() {
 		ITestResult result = Reporter.getCurrentTestResult();
 		result.setAttribute("TestName", "Testing ConfirmationType in the Reservation Response ");
@@ -433,7 +432,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 	}
 	
 
-	@Test(dependsOnMethods = "cancellationTesting")
+	@Test( enabled = false)
 	public synchronized void testTotalValue() {
 		ITestResult result = Reporter.getCurrentTestResult();
 		result.setAttribute("TestName", "Test Total value is Correctly Exsist in the Reservation Response");
@@ -452,7 +451,7 @@ public class CNX_SC_ID01_TEST extends ExtentTestNGReportBuilderExt {
 	}
 	
 
-	@Test(dependsOnMethods = "cancellationTesting")
+	@Test( enabled = false)
 	public synchronized void testTotalTaxValue() {
 		ITestResult result = Reporter.getCurrentTestResult();
 		result.setAttribute("TestName", "Test Total Tax value is Correctly Exsist in the Reservation Response");
